@@ -1,0 +1,38 @@
+<main id="home" class="py-5 px-3">
+    <h1 class="mb-5">Secured Blog</h1>
+
+    <h2 class="mt-5">Latest posts</h2>
+    <ul class="row mt-5">
+        <?php
+        foreach($data['posts']as $post)// pour chaque post dans les 4 plus recents
+        {
+        ?>   
+    
+        <li class="col-4 my-2">
+            <article class="card">
+                <header class="card-body">
+                    <!--on dynamise le titre des posts-->
+                    <h3 class="h5 card-title"><?= $post->getTitle() ?></h3>
+                    <h4 class="h6 card-subtitle mb-2 text-body-secondary">
+                    <?php
+                    //pour chaque post on recup la categorie et on la retourne
+                        foreach($post->getCategories() as $category)
+                                {
+                                    echo "{$category["title"]} ";
+                                }
+                    ?>
+                    </h4>
+                </header>
+                <section class="card-body">
+                    <p class="card-text">Post Excerpt</p>
+                    <!-- on met la route des posts retrouvés par leurs id-->
+                    <a href="index.php?route=post&post_id=<?= $post->getId() ?>" class="btn btn-primary">Lire le Post</a>
+                </section>
+            </article>
+        </li>
+       
+        <?php
+        }
+        ?>
+    </ul>
+</main>
